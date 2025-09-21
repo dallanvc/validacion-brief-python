@@ -1,0 +1,269 @@
+{
+  "version": "1.0",
+  "name": "sorteos.rules.full",
+  "description": "Conjunto de reglas para los sorteos Estelar y Sueños expresadas con la misma estructura que ranking‑top.  Cada modo describe sus valores por defecto, el esquema de etapas y la lógica para calcular fechas y horas a partir de una semilla de inicio.",
+  "durations_et_sorteos": {
+          "planificacion": 1,
+          "preEjecucion": 0,
+          "recalculo": 0,
+          "canjes": 1,
+          "validacion": 0,
+          "resultado": 0,
+          "finalizado": 0
+        },
+  "hours_et_sorteos": {
+    "planificacion": { "start": "08:00",     "end": "07:59:59" },
+    "preEjecucion": { "start": "07:00",     "end": "07:59:59" },
+    "acumulacion":  { "start": "00:00",     "end": "23:59:59" },
+    "recalculo":    { "start": "08:00",     "end": "08:29:59" },
+    "canjes":       { "start": "00:00",     "end": "23:59:59" },
+    "validacion":   { "start": "08:00",     "end": "08:29:59" },
+    "resultado":    { "start": "08:30",     "end": "08:29:59" },
+    "finalizado":   { "start": "08:30",     "end": "08:59:59" }
+  },
+  "schema_et_sorteos": {
+    "state": {
+      "etapaPlanificacion": { "fields": ["fechaInicio", "fechaFin", "horaInicio", "horaFin"] },
+      "etapaPreEjecucion": { "fields": ["fechaInicio", "fechaFin", "horaInicio", "horaFin"] },
+      "etapaAcumulacion":  { "fields": ["fechaInicio", "fechaFin", "horaInicio", "horaFin"] },
+      "etapaRecalculo":    { "fields": ["fechaInicio", "fechaFin", "horaInicio", "horaFin"] },
+      "etapaCanjes":       { "fields": ["fechaInicio", "fechaFin", "horaInicio", "horaFin"] },
+      "etapaValidacion":   { "fields": ["fechaInicio", "fechaFin", "horaInicio", "horaFin"] },
+      "etapaResultado":    { "fields": ["fechaInicio", "fechaFin", "horaInicio", "horaFin"] },
+      "etapaFinalizado":   { "fields": ["fechaInicio", "fechaFin", "horaInicio", "horaFin"] }
+    },
+    "params": {
+      "seed": {
+        "firstAcumulacionStart": "YYYY-MM-DD"
+      }
+    }
+  },
+  "logic_sorteos": {
+    "acumulacion": [
+      {
+        "target": "state.etapaAcumulacion[i].fechaInicio",
+        "value": {
+          "if": [
+            { "==": [ "i", 0 ] },
+            { "get": "params.seed.firstAcumulacionStart" },
+            { "addDays": [ "state.etapaAcumulacion[i-1].fechaFin", 1 ] }
+          ]
+        }
+      },
+      {
+        "target": "state.etapaAcumulacion[i].fechaFin",
+        "value": {
+          "addDays": [
+            "state.etapaAcumulacion[i].fechaInicio",
+            {
+              "if": [
+                { "==": [ { "mod": [ "i", 2 ] }, 0 ] },
+                { "get": "defaults.durations.acumulacion1" },
+                { "get": "defaults.durations.acumulacion2" }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "op": "setHoursFromFirst",
+        "args": [
+          "state.etapaAcumulacion",
+          { "get": "defaults.hours.acumulacion.start" },
+          { "get": "defaults.hours.acumulacion.end" }
+        ]
+      }
+    ],
+    "planificacion": [
+      {
+        "target": "state.etapaPlanificacion[i].fechaInicio",
+        "value": {
+          "addDays": [ "state.etapaAcumulacion[i].fechaInicio", { "neg": "defaults.durations.planificacion" } ]
+        }
+      },
+      {
+        "target": "state.etapaPlanificacion[i].fechaFin",
+        "value": { "get": "state.etapaAcumulacion[i].fechaInicio" }
+      },
+      {
+        "op": "setHoursFromFirst",
+        "args": [
+          "state.etapaPlanificacion",
+          { "get": "defaults.hours.planificacion.start" },
+          { "get": "defaults.hours.planificacion.end" }
+        ]
+      }
+    ],
+    "preEjecucion": [
+      {
+        "target": "state.etapaPreEjecucion[i].fechaInicio",
+        "value": { "get": "state.etapaAcumulacion[i].fechaInicio" }
+      },
+      {
+        "target": "state.etapaPreEjecucion[i].fechaFin",
+        "value": { "get": "state.etapaAcumulacion[i].fechaInicio" }
+      },
+      {
+        "op": "setHoursFromFirst",
+        "args": [
+          "state.etapaPreEjecucion",
+          { "get": "defaults.hours.preEjecucion.start" },
+          { "get": "defaults.hours.preEjecucion.end" }
+        ]
+      }
+    ],
+    "recalculo": [
+      {
+        "target": "state.etapaRecalculo[i].fechaInicio",
+        "value": { "get": "state.etapaAcumulacion[i].fechaFin" }
+      },
+      {
+        "target": "state.etapaRecalculo[i].fechaFin",
+        "value": { "get": "state.etapaAcumulacion[i].fechaFin" }
+      },
+      {
+        "op": "setHoursFromFirst",
+        "args": [
+          "state.etapaRecalculo",
+          { "get": "defaults.hours.recalculo.start" },
+          { "get": "defaults.hours.recalculo.end" }
+        ]
+      }
+    ],
+    "canjes": [
+      {
+        "target": "state.etapaCanjes[i].fechaInicio",
+        "value": { "get": "state.etapaAcumulacion[i].fechaFin" }
+      },
+      {
+        "target": "state.etapaCanjes[i].fechaFin",
+        "value": {
+          "addDays": [ "state.etapaAcumulacion[i].fechaFin", { "get": "defaults.durations.canjes" } ]
+        }
+      },
+      {
+        "op": "setHoursFromFirst",
+        "args": [
+          "state.etapaCanjes",
+          { "get": "defaults.hours.canjes.start" },
+          { "get": "defaults.hours.canjes.end" }
+        ]
+      }
+    ],
+    "validacion": [
+      {
+        "target": "state.etapaValidacion[i].fechaInicio",
+        "value": { "get": "state.etapaCanjes[i].fechaFin" }
+      },
+      {
+        "target": "state.etapaValidacion[i].fechaFin",
+        "value": { "get": "state.etapaCanjes[i].fechaFin" }
+      },
+      {
+        "op": "setHoursFromFirst",
+        "args": [
+          "state.etapaValidacion",
+          { "get": "defaults.hours.validacion.start" },
+          { "get": "defaults.hours.validacion.end" }
+        ]
+      }
+    ],
+    "resultado": [
+      {
+        "target": "state.etapaResultado[i].fechaInicio",
+        "value": { "get": "state.etapaValidacion[i].fechaFin" }
+      },
+      {
+        "target": "state.etapaResultado[i].fechaFin",
+        "value": {
+          "addDays": [ "state.etapaResultado[i].fechaInicio", { "get": "defaults.durations.resultado" } ]
+        }
+      },
+      {
+        "op": "setHoursFromFirst",
+        "args": [
+          "state.etapaResultado",
+          { "get": "defaults.hours.resultado.start" },
+          { "get": "defaults.hours.resultado.end" }
+        ]
+      }
+    ],
+    "finalizado": [
+      {
+        "target": "state.etapaFinalizado[i].fechaInicio",
+        "value": { "get": "state.etapaResultado[i].fechaFin" }
+      },
+      {
+        "target": "state.etapaFinalizado[i].fechaFin",
+        "value": { "get": "state.etapaResultado[i].fechaFin" }
+      },
+      {
+        "op": "setHoursFromFirst",
+        "args": [
+          "state.etapaFinalizado",
+          { "get": "defaults.hours.finalizado.start" },
+          { "get": "defaults.hours.finalizado.end" }
+        ]
+      }
+    ]
+  },
+  "modes": {
+
+    "estelar": {
+      "version": "1.0",
+      "name": "sorteos.estelar.rules.full",
+      "defaults": {
+        "rows": 10,
+        "multiplicador": 5,
+        "equivalencias": [
+          { "min": 5, "max": 200, "puntaje": 1 }
+        ],
+        "configuraciones": {
+          "ACUM_MAX_OPC": 200,
+          "MAE_CANTIDAD_CHOCOLATEO": 60,
+          "OPC_MIN_CANJE": 25,
+          "TIPO_AUDIENCIA": 1
+        },
+        "durations": {
+
+          "acumulacion1": 2,
+          "acumulacion2": 3
+        },
+
+        "premios": [
+          { "premio": 500.00,  "ganadores": 2 },
+          { "premio": 1000.00, "ganadores": 2 },
+          { "premio": 1500.00, "ganadores": 2 },
+          { "premio": 2000.00, "ganadores": 2 },
+          { "premio": 5000.00, "ganadores": 1 }
+        ]
+      }
+    },
+    "suenos": {
+      "version": "1.0",
+      "name": "sorteos.suenos.rules.full",
+      "defaults": {
+        "rows": 2,
+        "multiplicador": 5,
+        "equivalencias": [
+          { "min": 5, "max": 200, "puntaje": 1 }
+        ],
+        "configuraciones": {
+          "ACUM_MAX_OPC": 8000,
+          "MAE_CANTIDAD_CHOCOLATEO": 60,
+          "OPC_MIN_CANJE": 100,
+          "TIPO_AUDIENCIA": 1
+        },
+        "durations": {
+          "acumulacion1": 14,
+          "acumulacion2": 14
+        },
+        "premios": [
+          { "premio": 2500.00, "ganadores": 2 },
+          { "premio": 5000.00, "ganadores": 1 },
+          { "premio": 10000.00, "ganadores": 1 }
+        ]
+      }
+    }
+  }
+}

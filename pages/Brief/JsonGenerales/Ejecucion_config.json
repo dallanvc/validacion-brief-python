@@ -1,0 +1,233 @@
+{
+  "17": {
+    "nombre": "TOP",
+    "multiplicador": 10,
+    "configuraciones": {
+      "CANTIDAD_FILAS": 30,
+      "TIPO_AUDIENCIA": 1
+    },
+    "premios": [
+      { "condicion_minima": 1,  "condicion_maxima": 0,  "valor_premio": 10000, "cantidad_ganadores": 1 },
+      { "condicion_minima": 2,  "condicion_maxima": 0,  "valor_premio": 5500,  "cantidad_ganadores": 1 },
+      { "condicion_minima": 3,  "condicion_maxima": 0,  "valor_premio": 3500,  "cantidad_ganadores": 1 },
+      { "condicion_minima": 4,  "condicion_maxima": 0,  "valor_premio": 2000,  "cantidad_ganadores": 1 },
+      { "condicion_minima": 5,  "condicion_maxima": 0,  "valor_premio": 1500,  "cantidad_ganadores": 1 },
+      { "condicion_minima": 6,  "condicion_maxima": 0,  "valor_premio": 1000,  "cantidad_ganadores": 1 },
+      { "condicion_minima": 7,  "condicion_maxima": 0,  "valor_premio": 800,   "cantidad_ganadores": 1 },
+      { "condicion_minima": 8,  "condicion_maxima": 0,  "valor_premio": 700,   "cantidad_ganadores": 1 },
+      { "condicion_minima": 9,  "condicion_maxima": 0,  "valor_premio": 600,   "cantidad_ganadores": 1 },
+      { "condicion_minima": 10, "condicion_maxima": 0,  "valor_premio": 500,   "cantidad_ganadores": 1 },
+      { "condicion_minima": 11, "condicion_maxima": 20, "valor_premio": 400,   "cantidad_ganadores": 10 },
+      { "condicion_minima": 21, "condicion_maxima": 25, "valor_premio": 300,   "cantidad_ganadores": 5 }
+    ],
+    "etapas": {
+      "ACUMULACIÓN": {
+        "inicio_hora": "08:00:00"
+      },
+      "PLANIFICADO": {
+        "inicio_dias_antes_acumulacion": 1,
+        "fin_horas_antes_acumulacion": 1
+      },
+      "PRE EJECUCION": {
+        "inicio_horas_antes_acumulacion": 1
+      },
+      "VALIDACION": {
+        "inicio_justo_despues_acumulacion": true,
+        "duracion_minutos": 30
+      },
+      "RECALCULO": {
+        "inicio_justo_despues_acumulacion": true,
+        "duracion_minutos": 30
+      },
+      "RESULTADO": {
+        "inicio_justo_despues_recalculo": true
+      },
+      "RESULTADO IVIEW": {
+        "inicio_minutos_despues_acumulacion": 30,
+        "fin_dia_siguiente_hora": "13:59:59"
+      },
+      "PAGOS FISICO": {
+        "inicio_horas_despues_acumulacion": 4,
+        "fin_dia_siguiente_hora": "01:30:00"
+      },
+      "PAGOS FISICO VENCIDOS": {
+        "inicio_dia_siguiente_hora": "10:00:00"
+      },
+      "FINALIZADO": {
+        "inicio_justo_despues_resultado": true,
+        "duracion_minutos": 30
+      }
+    }
+  },
+  "18": {
+    "nombre": "ESTELAR",
+    "multiplicador": 10,
+    "equivalencias": {
+      "minimo": 5,
+      "maximo": 200,
+      "puntaje": 1
+    },
+    "configuraciones": {
+      "ACUM_MAX_OPC": 200,
+      "MAE_CANTIDAD_CHOCOLATEO": 60,
+      "OPC_MIN_CANJE": 25,
+      "TIPO_AUDIENCIA": 1
+    },
+    "premios": [
+      { "condicion_minima": 2, "condicion_maxima": 0, "valor_premio": 500, "cantidad_ganadores": 2 },
+      { "condicion_minima": 2, "condicion_maxima": 0, "valor_premio": 1000, "cantidad_ganadores": 2 },
+      { "condicion_minima": 2, "condicion_maxima": 0, "valor_premio": 2000, "cantidad_ganadores": 2 }
+    ],
+    "etapas": {
+      "PLANIFICADO": {
+        "inicio_dias_antes_acumulacion": 1,
+        "fin_horas_antes_acumulacion": 1
+      },
+      "PRE EJECUCION": {
+        "inicio_horas_antes_acumulacion": 1
+      },
+      "ACUMULACIÓN": {
+        "inicio_hora": "00:00:00"
+      },
+      "RECALCULO": {
+        "inicio_justo_despues_acumulacion": true,
+        "duracion_minutos": 30
+      },
+      "CANJES": {
+        "inicio_ultimo_dia_acumulacion_hora": "00:00:00",
+        "fin_un_segundo_antes_sorteo": true
+      },
+      "SORTEO": {
+        "no_cruzar_con_canjes": true
+      },
+      "VALIDACION": {
+        "inicio_justo_despues_canjes": true,
+        "duracion_igual_sorteo": true
+      },
+      "RESULTADO": {
+        "inicio_justo_despues_validacion": true
+      },
+      "FINALIZADO": {
+        "inicio_justo_despues_resultado": true,
+        "fin_hora": "05:59:59"
+      }
+    }
+  },
+  "19": {
+    "nombre": "SUEÑOS",
+    "multiplicador": 10,
+    "equivalencias": {
+      "minimo": 5,
+      "maximo": 200,
+      "puntaje": 1
+    },
+    "configuraciones": {
+      "ACUM_MAX_OPC": 8000,
+      "MAE_CANTIDAD_CHOCOLATEO": 60,
+      "OPC_MIN_CANJE": 100,
+      "TIPO_AUDIENCIA": 1
+    },
+    "premios": [
+      { "condicion_minima": 2, "condicion_maxima": 0, "valor_premio": 2500, "cantidad_ganadores": 2 },
+      { "condicion_minima": 1, "condicion_maxima": 0, "valor_premio": 5000, "cantidad_ganadores": 1 },
+      { "condicion_minima": 1, "condicion_maxima": 0, "valor_premio": 10000, "cantidad_ganadores": 1 }
+    ],
+    "etapas": {
+      "PLANIFICADO": {
+        "inicio_dias_antes_acumulacion": 1,
+        "fin_horas_antes_acumulacion": 1
+      },
+      "PRE EJECUCION": {
+        "inicio_horas_antes_acumulacion": 1
+      },
+      "ACUMULACIÓN": {
+        "inicio_hora": "00:00:00"
+      },
+      "RECALCULO": {
+        "inicio_justo_despues_acumulacion": true,
+        "duracion_minutos": 30
+      },
+      "CANJES": {
+        "inicio_ultimo_dia_acumulacion_hora": "00:00:00",
+        "fin_un_segundo_antes_sorteo": true
+      },
+      "SORTEO": {
+        "no_cruzar_con_canjes": true
+      },
+      "VALIDACION": {
+        "inicio_justo_despues_canjes": true,
+        "duracion_igual_sorteo": true
+      },
+      "RESULTADO": {
+        "inicio_justo_despues_validacion": true
+      },
+      "FINALIZADO": {
+        "inicio_justo_despues_resultado": true,
+        "fin_hora": "05:59:59"
+      }
+    }
+  },
+  "22": {
+    "nombre": "SALTA Y GANA",
+    "multiplicador": 10,
+    "equivalencias": [
+      { "minimo": 500, "puntaje": 5 },
+      { "minimo": 750, "puntaje": 10 },
+      { "minimo": 1000, "puntaje": 20 },
+      { "minimo": 1250, "puntaje": 50 },
+      { "minimo": 1500, "puntaje": 75 },
+      { "minimo": 1750, "puntaje": 100 },
+      { "minimo": 2000, "puntaje": 125 },
+      { "minimo": 2250, "puntaje": 150 },
+      { "minimo": 2500, "puntaje": 200 },
+      { "minimo": 2501, "puntaje": 1 }
+    ],
+    "configuraciones": {
+      "ACUM_MAX_OPC": 500,
+      "ACUM_MIN_PUNTOS": 500,
+      "MAE_CANTIDAD_CHOCOLATEO": 60,
+      "OPC_MIN_CANJE": 5,
+      "TIPO_AUDIENCIA": 1
+    },
+    "premios": [
+      { "condicion_minima": 0, "condicion_maxima": 0, "valor_premio": 250, "cantidad_ganadores": 2 },
+      { "condicion_minima": 0, "condicion_maxima": 0, "valor_premio": 500, "cantidad_ganadores": 2 },
+      { "condicion_minima": 0, "condicion_maxima": 0, "valor_premio": 1000, "cantidad_ganadores": 2 },
+      { "condicion_minima": 0, "condicion_maxima": 0, "valor_premio": 1999.99, "cantidad_ganadores": 1 },
+      { "condicion_minima": 0, "condicion_maxima": 0, "valor_premio": 5000, "cantidad_ganadores": 1 }
+    ],
+    "etapas": {
+      "SORTEO": {
+      },
+      "PLANIFICADO": {
+        "inicio_dias_antes_acumulacion": 1,
+        "fin_horas_antes_acumulacion": 1
+      },
+      "PRE EJECUCION": {
+        "inicio_horas_antes_acumulacion": 1
+      },
+      "ACUMULACIÓN": {
+        "inicio_hora": "00:00:00"
+      },
+      "RECALCULO": {
+        "inicio_justo_despues_acumulacion": true,
+        "duracion_minutos": 30
+      },
+      "CANJES": {
+        "inicio_justo_despues_acumulacion": true,
+        "fin_dia_siguiente_hora": "01:09:59"
+      },
+      "VALIDACION": {
+        "inicio_justo_despues_canjes": true,
+        "duracion_igual_sorteo": true
+      },
+      "RESULTADO": {
+        "inicio_justo_despues_validacion": true
+      },  
+      "FINALIZADO": {
+        "inicio_justo_despues_resultado": true,
+        "fin_hora": "05:59:59"
+      }
+    }
+  }
+}

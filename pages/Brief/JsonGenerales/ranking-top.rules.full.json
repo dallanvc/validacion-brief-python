@@ -1,0 +1,348 @@
+{
+  "version": "1.0",
+  "name": "ranking-top.rules.full",
+  "description": "Plantilla de reglas y valores por defecto para todas las etapas de la promoción TOP. Este archivo incorpora la lógica de planificación, pre‐ejecución, acumulación, validación, recálculo, resultado, resultado IVIEW, pagos físico, pagos físico vencidos y finalizado según el proyecto de validación del brief.",
+  "defaults": {
+    "rows": 4,
+    "multiplicador": 5,
+    "equivalencias": [
+      { "min": 5, "max": 200, "puntaje": 1 }
+    ],
+    "configuraciones": {
+      "CANTIDAD_FILAS": 30,
+      "TIPO_AUDIENCIA": 1
+    },
+    "durations": {
+      "acumulacion": 7,
+      "planificacion": 1,
+      "preEjecucion": 0,
+      "validacion": 0,
+      "recalculo": 0,
+      "resultado": 7,
+      "pago": 1,
+      "vencido": 30,
+      "finalizado": 0
+    },
+    "hours": {
+      "acumulacion": {
+        "start": "08:00",
+        "end": "07:59:59"
+      },
+      "planificacion": {
+        "start": "08:00",
+        "end": "07:00"
+      },
+      "preEjecucion": {
+        "start": "07:00",
+        "end": "07:59:59"
+      },
+      "validacion": {
+        "start": "08:00",
+        "end": "08:29:59"
+      },
+      "recalculo": {
+        "start": "08:00",
+        "end": "08:29:59"
+      },
+      "resultado": {
+        "start": "08:30",
+        "end": "08:30"
+      },
+      "resultadoIview": {
+        "start": "08:30",
+        "end": "13:59:59"
+      },
+      "pago": {
+        "start": "12:00",
+        "end": "01:30:00"
+      },
+      "vencido": {
+        "start": "10:00",
+        "end": "09:59:59"
+      },
+      "finalizado": {
+        "start": "08:30",
+        "end": "08:59:59"
+      }
+    },
+    "premios": [
+      { "posicion": "1", "premio": 10000 },
+      { "posicion": "2", "premio": 5500 },
+      { "posicion": "3", "premio": 3500 },
+      { "posicion": "4", "premio": 2000 },
+      { "posicion": "5", "premio": 1500 },
+      { "posicion": "6", "premio": 1000 },
+      { "posicion": "7", "premio": 800 },
+      { "posicion": "8", "premio": 700 },
+      { "posicion": "9", "premio": 600 },
+      { "posicion": "10", "premio": 500 },
+      { "posicion": "11-20", "premio": 400 },
+      { "posicion": "21-25", "premio": 300 }
+    ]
+  },
+  "schema": {
+    "state": {
+      "etapaPlanificacion": {
+        "fields": ["fechaInicio", "fechaFin", "horaInicio", "horaFin"]
+      },
+      "etapaPreEjecucion": {
+        "fields": ["fechaInicio", "fechaFin", "horaInicio", "horaFin"]
+      },
+      "etapaAcumulacion": {
+        "fields": ["fechaInicio", "fechaFin", "horaInicio", "horaFin"]
+      },
+      "etapaValidacion": {
+        "fields": ["fechaInicio", "fechaFin", "horaInicio", "horaFin"]
+      },
+      "etapaRecalculo": {
+        "fields": ["fechaInicio", "fechaFin", "horaInicio", "horaFin"]
+      },
+      "etapaResultado": {
+        "fields": ["fechaInicio", "fechaFin", "horaInicio", "horaFin"]
+      },
+      "etapaResultadoIview": {
+        "fields": ["fechaInicio", "fechaFin", "horaInicio", "horaFin"]
+      },
+      "etapaPagoPremio": {
+        "fields": ["fechaInicio", "fechaFin", "horaInicio", "horaFin"]
+      },
+      "etapaPagoVencido": {
+        "fields": ["fechaInicio", "fechaFin", "horaInicio", "horaFin"]
+      },
+      "etapaFinalizado": {
+        "fields": ["fechaInicio", "fechaFin", "horaInicio", "horaFin"]
+      }
+    },
+    "params": {
+      "seed": {
+        "firstAcumulacionStart": "YYYY-MM-DD"
+      }
+    }
+  },
+  "logic": {
+    "acumulacion": [
+      {
+        "target": "state.etapaAcumulacion[i].fechaInicio",
+        "value": {
+          "if": [
+            {"==": ["i", 0]},
+            {"get": "params.seed.firstAcumulacionStart"},
+            {"addDays": ["state.etapaAcumulacion[i-1].fechaInicio", {"get": "defaults.durations.acumulacion"}]}
+          ]
+        }
+      },
+      {
+        "target": "state.etapaAcumulacion[i].fechaFin",
+        "value": {
+          "addDays": ["state.etapaAcumulacion[i].fechaInicio", {"get": "defaults.durations.acumulacion"}]
+        }
+      },
+      {
+        "op": "setHoursFromFirst",
+        "args": [
+          "state.etapaAcumulacion",
+          {"get": "defaults.hours.acumulacion.start"},
+          {"get": "defaults.hours.acumulacion.end"}
+        ]
+      }
+    ],
+    "planificacion": [
+      {
+        "target": "state.etapaPlanificacion[i].fechaInicio",
+        "value": {
+          "addDays": ["state.etapaAcumulacion[i].fechaInicio", -1]
+        }
+      },
+      {
+        "target": "state.etapaPlanificacion[i].fechaFin",
+        "value": {
+          "get": "state.etapaAcumulacion[i].fechaInicio"
+        }
+      },
+      {
+        "op": "setHoursFromFirst",
+        "args": [
+          "state.etapaPlanificacion",
+          {"get": "defaults.hours.planificacion.start"},
+          {"get": "defaults.hours.planificacion.end"}
+        ]
+      }
+    ],
+    "preEjecucion": [
+      {
+        "target": "state.etapaPreEjecucion[i].fechaInicio",
+        "value": {
+          "get": "state.etapaAcumulacion[i].fechaInicio"
+        }
+      },
+      {
+        "target": "state.etapaPreEjecucion[i].fechaFin",
+        "value": {
+          "get": "state.etapaAcumulacion[i].fechaInicio"
+        }
+      },
+      {
+        "op": "setHoursFromFirst",
+        "args": [
+          "state.etapaPreEjecucion",
+          {"get": "defaults.hours.preEjecucion.start"},
+          {"get": "defaults.hours.preEjecucion.end"}
+        ]
+      }
+    ],
+    "validacion": [
+      {
+        "target": "state.etapaValidacion[i].fechaInicio",
+        "value": {
+          "get": "state.etapaAcumulacion[i].fechaFin"
+        }
+      },
+      {
+        "target": "state.etapaValidacion[i].fechaFin",
+        "value": {
+          "get": "state.etapaAcumulacion[i].fechaFin"
+        }
+      },
+      {
+        "op": "setHoursFromFirst",
+        "args": [
+          "state.etapaValidacion",
+          {"get": "defaults.hours.validacion.start"},
+          {"get": "defaults.hours.validacion.end"}
+        ]
+      }
+    ],
+    "recalculo": [
+      {
+        "target": "state.etapaRecalculo[i].fechaInicio",
+        "value": {
+          "get": "state.etapaAcumulacion[i].fechaFin"
+        }
+      },
+      {
+        "target": "state.etapaRecalculo[i].fechaFin",
+        "value": {
+          "get": "state.etapaAcumulacion[i].fechaFin"
+        }
+      },
+      {
+        "op": "setHoursFromFirst",
+        "args": [
+          "state.etapaRecalculo",
+          {"get": "defaults.hours.recalculo.start"},
+          {"get": "defaults.hours.recalculo.end"}
+        ]
+      }
+    ],
+    "resultado": [
+      {
+        "target": "state.etapaResultado[i].fechaInicio",
+        "value": {
+          "get": "state.etapaRecalculo[i].fechaFin"
+        }
+      },
+      {
+        "target": "state.etapaResultado[i].fechaFin",
+        "value": {
+          "addDays": ["state.etapaResultado[i].fechaInicio", {"get": "defaults.durations.resultado"}]
+        }
+      },
+      {
+        "op": "setHoursFromFirst",
+        "args": [
+          "state.etapaResultado",
+          {"get": "defaults.hours.resultado.start"},
+          {"get": "defaults.hours.resultado.end"}
+        ]
+      }
+    ],
+    "resultadoIview": [
+      {
+        "target": "state.etapaResultadoIview[i].fechaInicio",
+        "value": {
+          "get": "state.etapaAcumulacion[i].fechaFin"
+        }
+      },
+      {
+        "target": "state.etapaResultadoIview[i].fechaFin",
+        "value": {
+          "addDays": ["state.etapaAcumulacion[i].fechaFin", 1]
+        }
+      },
+      {
+        "op": "setHoursFromFirst",
+        "args": [
+          "state.etapaResultadoIview",
+          {"get": "defaults.hours.resultadoIview.start"},
+          {"get": "defaults.hours.resultadoIview.end"}
+        ]
+      }
+    ],
+    "pago": [
+      {
+        "target": "state.etapaPagoPremio[i].fechaInicio",
+        "value": {
+          "get": "state.etapaAcumulacion[i].fechaFin"
+        }
+      },
+      {
+        "target": "state.etapaPagoPremio[i].fechaFin",
+        "value": {
+          "addDays": ["state.etapaAcumulacion[i].fechaFin", 1]
+        }
+      },
+      {
+        "op": "setHoursFromFirst",
+        "args": [
+          "state.etapaPagoPremio",
+          {"get": "defaults.hours.pago.start"},
+          {"get": "defaults.hours.pago.end"}
+        ]
+      }
+    ],
+    "vencido": [
+      {
+        "target": "state.etapaPagoVencido[i].fechaInicio",
+        "value": {
+          "addDays": ["state.etapaAcumulacion[i].fechaFin", 1]
+        }
+      },
+      {
+        "target": "state.etapaPagoVencido[i].fechaFin",
+        "value": {
+          "addDays": ["state.etapaPagoVencido[i].fechaInicio", {"get": "defaults.durations.vencido"}]
+        }
+      },
+      {
+        "op": "setHoursFromFirst",
+        "args": [
+          "state.etapaPagoVencido",
+          {"get": "defaults.hours.vencido.start"},
+          {"get": "defaults.hours.vencido.end"}
+        ]
+      }
+    ],
+    "finalizado": [
+      {
+        "target": "state.etapaFinalizado[i].fechaInicio",
+        "value": {
+          "get": "state.etapaResultado[i].fechaFin"
+        }
+      },
+      {
+        "target": "state.etapaFinalizado[i].fechaFin",
+        "value": {
+          "get": "state.etapaResultado[i].fechaFin"
+        }
+      },
+      {
+        "op": "setHoursFromFirst",
+        "args": [
+          "state.etapaFinalizado",
+          {"get": "defaults.hours.finalizado.start"},
+          {"get": "defaults.hours.finalizado.end"}
+        ]
+      }
+    ]
+  }
+}

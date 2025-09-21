@@ -1,0 +1,264 @@
+{
+  "version": "1.0",
+  "name": "sorteos.saltaYGana.rules.full",
+  "description": "Reglas para la promoción Salta y Gana expresadas con el mismo esquema que ranking‑top.  Este archivo define valores por defecto, el esquema del estado y la lógica que calcula las fechas y horas para cada etapa a partir de una semilla inicial.",
+  "defaults": {
+    "rows": 4,
+    "multiplicador": 5,
+    "equivalencias": [
+      { "min": 500,  "max": 749,    "puntaje": 5   },
+      { "min": 750,  "max": 999,    "puntaje": 10  },
+      { "min": 1000, "max": 1249,   "puntaje": 20  },
+      { "min": 1250, "max": 1499,   "puntaje": 50  },
+      { "min": 1500, "max": 1749,   "puntaje": 75  },
+      { "min": 1750, "max": 1999,   "puntaje": 100 },
+      { "min": 2000, "max": 2249,   "puntaje": 125 },
+      { "min": 2250, "max": 2499,   "puntaje": 150 },
+      { "min": 2500, "max": 9999999,"puntaje": 200 }
+    ],
+
+    "excedenteEquivalencia": { "puntos": 100, "opcion": 1 },
+    "configuraciones": {
+      "ACUM_MAX_OPC": 500,
+      "ACUM_MIN_PUNTOS": 500,
+      "MAE_CANTIDAD_CHOCOLATEO": 60,
+      "OPC_MIN_CANJE": 5,
+      "TIPO_AUDIENCIA": 1
+    },
+
+    "durations": {
+      "acumulacion": 6,
+      "sorteo1": 1,
+      "sorteo2": 0,
+      "canje1": 0,
+      "canje2": 1,
+      "recalculo": 0,
+      "validacion": 0,
+      "resultado": 0,
+      "finalizado": 0
+    },
+
+    "hours": {
+      "acumulacion": { "start": "00:00",   "end": "23:59:59" },
+      "sorteo":      { "start": "18:00",   "end": "02:59:59" },
+      "canje":       { "start": "00:00",   "end": "01:09:59" },
+      "recalculo":   { "start": "08:00",   "end": "08:29:59" },
+      "validacion":  { "start": "03:00",   "end": "03:29:59" },
+      "resultado":   { "start": "03:00",   "end": "02:59:59"  },
+      "finalizado":  { "start": "05:59:59", "end": "05:59:59" }
+    },
+
+    "premios": [
+      { "premio": 250.00,  "ganadores": 2 },
+      { "premio": 500.00,  "ganadores": 2 },
+      { "premio": 1000.00, "ganadores": 2 },
+      { "premio": 1999.99, "ganadores": 1 },
+      { "premio": 5000.00, "ganadores": 1 }
+    ]
+  },
+  "schema": {
+    "state": {
+
+      "etapaAcumulacion": { "fields": ["fechaInicio", "fechaFin", "horaInicio", "horaFin"] },
+      "etapaSorteo1":     { "fields": ["fechaInicio", "fechaFin", "horaInicio", "horaFin"] },
+      "etapaSorteo2":     { "fields": ["fechaInicio", "fechaFin", "horaInicio", "horaFin"] },
+      "etapaCanje1":      { "fields": ["fechaInicio", "fechaFin", "horaInicio", "horaFin"] },
+      "etapaCanje2":      { "fields": ["fechaInicio", "fechaFin", "horaInicio", "horaFin"] },
+      "etapaRecalculo":   { "fields": ["fechaInicio", "fechaFin", "horaInicio", "horaFin"] },
+      "etapaValidacion":  { "fields": ["fechaInicio", "fechaFin", "horaInicio", "horaFin"] },
+      "etapaResultado":   { "fields": ["fechaInicio", "fechaFin", "horaInicio", "horaFin"] },
+      "etapaFinalizado":  { "fields": ["fechaInicio", "fechaFin", "horaInicio", "horaFin"] }
+    },
+    "params": {
+      "seed": {
+        "firstAcumulacionStart": "YYYY-MM-DD"
+      }
+    }
+  },
+  "logic": {
+
+    "acumulacion": [
+      {
+        "target": "state.etapaAcumulacion[i].fechaInicio",
+        "value": {
+          "if": [
+            { "==": [ "i", 0 ] },
+            { "get": "params.seed.firstAcumulacionStart" },
+            { "addDays": [ "state.etapaAcumulacion[i-1].fechaFin", 1 ] }
+          ]
+        }
+      },
+      {
+        "target": "state.etapaAcumulacion[i].fechaFin",
+        "value": {
+          "addDays": [ "state.etapaAcumulacion[i].fechaInicio", { "get": "defaults.durations.acumulacion" } ]
+        }
+      },
+      {
+        "op": "setHoursFromFirst",
+        "args": [
+          "state.etapaAcumulacion",
+          { "get": "defaults.hours.acumulacion.start" },
+          { "get": "defaults.hours.acumulacion.end" }
+        ]
+      }
+    ],
+
+    "sorteo1": [
+      {
+        "target": "state.etapaSorteo1[i].fechaInicio",
+        "value": { "addDays": [ "state.etapaAcumulacion[i].fechaFin", 1 ] }
+      },
+      {
+        "target": "state.etapaSorteo1[i].fechaFin",
+        "value": { "addDays": [ "state.etapaSorteo1[i].fechaInicio", { "get": "defaults.durations.sorteo1" } ] }
+      },
+      {
+        "target": "state.etapaSorteo1[i].horaInicio",
+        "value": { "get": "defaults.hours.sorteo.start" }
+      },
+      {
+        "target": "state.etapaSorteo1[i].horaFin",
+        "value": { "get": "defaults.hours.sorteo.end" }
+      }
+    ],
+
+    "sorteo2": [
+      {
+        "target": "state.etapaSorteo2[i].fechaInicio",
+        "value": { "addDays": [ "state.etapaAcumulacion[i].fechaFin", 1 ] }
+      },
+      {
+        "target": "state.etapaSorteo2[i].fechaFin",
+        "value": { "get": "state.etapaSorteo2[i].fechaInicio" }
+      },
+      {
+        "target": "state.etapaSorteo2[i].horaInicio",
+        "value": { "get": "defaults.hours.sorteo.start" }
+      },
+      {
+        "target": "state.etapaSorteo2[i].horaFin",
+        "value": { "get": "defaults.hours.sorteo.end" }
+      }
+    ],
+
+    "canje1": [
+      {
+        "target": "state.etapaCanje1[i].fechaInicio",
+        "value": { "addDays": [ "state.etapaAcumulacion[i].fechaFin", 1 ] }
+      },
+      {
+        "target": "state.etapaCanje1[i].fechaFin",
+        "value": { "get": "state.etapaCanje1[i].fechaInicio" }
+      },
+      {
+        "target": "state.etapaCanje1[i].horaInicio",
+        "value": { "get": "defaults.hours.canje.start" }
+      },
+      {
+        "target": "state.etapaCanje1[i].horaFin",
+        "value": {
+          "addSeconds": [ { "get": "defaults.hours.sorteo.start" }, -1 ]
+        }
+      }
+    ],
+
+    "canje2": [
+      {
+        "target": "state.etapaCanje2[i].fechaInicio",
+        "value": { "get": "state.etapaCanje1[i].fechaInicio" }
+      },
+      {
+        "target": "state.etapaCanje2[i].fechaFin",
+        "value": { "addDays": [ "state.etapaCanje2[i].fechaInicio", { "get": "defaults.durations.canje2" } ] }
+      },
+      {
+        "target": "state.etapaCanje2[i].horaInicio",
+        "value": {
+          "addSeconds": [ { "get": "defaults.hours.sorteo.end" }, 1 ]
+        }
+      },
+      {
+        "target": "state.etapaCanje2[i].horaFin",
+        "value": {
+          "addSeconds": [ { "get": "defaults.hours.sorteo.start" }, -1 ]
+        }
+      }
+    ],
+
+    "recalculo": [
+      {
+        "target": "state.etapaRecalculo[i].fechaInicio",
+        "value": { "get": "state.etapaAcumulacion[i].fechaFin" }
+      },
+      {
+        "target": "state.etapaRecalculo[i].fechaFin",
+        "value": { "get": "state.etapaAcumulacion[i].fechaFin" }
+      },
+      {
+        "op": "setHoursFromFirst",
+        "args": [
+          "state.etapaRecalculo",
+          { "get": "defaults.hours.recalculo.start" },
+          { "get": "defaults.hours.recalculo.end" }
+        ]
+      }
+    ],
+    "validacion": [
+      {
+        "target": "state.etapaValidacion[i].fechaInicio",
+        "value": { "get": "state.etapaCanje2[i].fechaFin" }
+      },
+      {
+        "target": "state.etapaValidacion[i].fechaFin",
+        "value": { "get": "state.etapaCanje2[i].fechaFin" }
+      },
+      {
+        "op": "setHoursFromFirst",
+        "args": [
+          "state.etapaValidacion",
+          { "get": "defaults.hours.validacion.start" },
+          { "get": "defaults.hours.validacion.end" }
+        ]
+      }
+    ],
+
+    "resultado": [
+      {
+        "target": "state.etapaResultado[i].fechaInicio",
+        "value": { "get": "state.etapaValidacion[i].fechaFin" }
+      },
+      {
+        "target": "state.etapaResultado[i].fechaFin",
+        "value": { "addDays": [ "state.etapaResultado[i].fechaInicio", { "get": "defaults.durations.resultado" } ] }
+      },
+      {
+        "op": "setHoursFromFirst",
+        "args": [
+          "state.etapaResultado",
+          { "get": "defaults.hours.resultado.start" },
+          { "get": "defaults.hours.resultado.end" }
+        ]
+      }
+    ],
+
+    "finalizado": [
+      {
+        "target": "state.etapaFinalizado[i].fechaInicio",
+        "value": { "get": "state.etapaResultado[i].fechaFin" }
+      },
+      {
+        "target": "state.etapaFinalizado[i].fechaFin",
+        "value": { "get": "state.etapaResultado[i].fechaFin" }
+      },
+      {
+        "op": "setHoursFromFirst",
+        "args": [
+          "state.etapaFinalizado",
+          { "get": "defaults.hours.finalizado.start" },
+          { "get": "defaults.hours.finalizado.end" }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,58 @@
+[
+  {
+    "codigo": "1",
+    "nombre": "Mesas BJ",
+    "dia_inicio": "martes",
+    "hora_inicio": "08:00:00",
+    "dia_fin": "martes",
+    "hora_fin": "08:00:00"
+  },
+  {
+    "codigo": "2",
+    "nombre": "MESAS PYB",
+    "dia_inicio": "jueves",
+    "hora_inicio": "08:00:00",
+    "dia_fin": "jueves",
+    "hora_fin": "08:00:00"
+  },
+  {
+    "codigo": "3",
+    "nombre": "MESAS RULETA",
+    "dia_inicio": "lunes",
+    "hora_inicio": "08:00:00",
+    "dia_fin": "lunes",
+    "hora_fin": "08:00:00"
+  },
+  {
+    "codigo": "4",
+    "nombre": "MESAS TIE",
+    "dia_inicio": "miércoles",
+    "hora_inicio": "08:00:00",
+    "dia_fin": "miércoles",
+    "hora_fin": "08:00:00"
+  },
+  {
+    "codigo": "5",
+    "nombre": "QUINTERO",
+    "dia_inicio": ["lunes", "jueves"],
+    "hora_inicio": "18:00:00",
+    "dia_fin": ["miércoles", "domingo"],
+    "hora_fin": "08:01:00"
+  },
+  {
+    "codigo": "17",
+    "nombre": "TOP"
+  },
+  {
+    "codigo": "18",
+    "nombre": "ESTELAR"
+  },
+  {
+    "codigo": "19",
+    "nombre": "SUEÑOS"
+  },
+  {
+    "codigo": "22",
+    "nombre": "SALTA Y GANA"
+  }
+]
