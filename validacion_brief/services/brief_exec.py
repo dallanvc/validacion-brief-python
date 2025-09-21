@@ -1,3 +1,17 @@
+"""
+Main validation logic for BRIEF promotions.
+
+This module is a direct translation of ``services/briefExec.ts`` from
+the TypeScript project.  It loads execution configurations from a
+JSON file, queries the database for actual data and writes out
+validation reports under ``pages/Brief/Validaciones/<promoId>``.  It
+also supports validating individual execution segments.
+
+Functions defined here are synchronous for simplicity; the
+TypeScript originals were ``async`` but Python's synchronous file I/O
+and database calls suffice.
+"""
+
 from __future__ import annotations
 
 import json
@@ -5,7 +19,7 @@ import logging
 import os
 from pathlib import Path
 from typing import Any, Dict, List, Optional
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from ..compat.database_connection27 import (
     queryMultiplicador,
@@ -26,9 +40,28 @@ from ..infra.reporting.json_reporter import ensure_dir, write_json
 PromoConfig = Dict[str, Any]
 
 def load_ejecucion_config() -> Dict[str, PromoConfig]:
+    """Assemble execution configuration solely from the JSON rule templates.
 
+    This implementation no longer reads from ``Ejecucion_config.json``.  Instead
+    it constructs a configuration dictionary for each promotion based on the
+    template files in the ``nuevo`` folder.  Promotions are mapped as follows:
+
+    * ``17`` (TOP)         → ``ranking-top.rules.full.json``【465686397035438†L0-L18】.
+    * ``18`` (Estelar)     → mode ``estelar`` in ``sorteos.rules.full.json``.
+    * ``19`` (Sueños)      → mode ``suenos`` in ``sorteos.rules.full.json``.
+    * ``22`` (Salta y Gana)→ ``sorteos.saltaYGana.rules.json``【602207407408589†L0-L20】.
+
+    Each rule file provides default values (multiplicador, equivalencias,
+    configuraciones, premios) and stage logic.  The stage names are
+    upper‑cased when constructing the configuration.  For ranking, stage
+    identifiers are mapped to their legacy names (e.g., ``planificacion``
+    becomes ``PLANIFICADO``) to mirror the original specification.
+    """
     def parse_range_position(pos: str) -> (int, int, int):
-
+        """Convert a position string (e.g., "1" or "11-20") into
+        (cond_min, cond_max, ganadores).  When a single position is provided,
+        the maximum is zero and the number of winners is one.  When a range
+        is provided, the number of winners equals the range length.【465686397035438†L71-L84】"""
         try:
             if '-' in pos:
                 start_str, end_str = pos.split('-', 1)
@@ -47,7 +80,13 @@ def load_ejecucion_config() -> Dict[str, PromoConfig]:
                 return 0, 0, 1
 
     def parse_ranking_top(filepath: Path) -> Optional[PromoConfig]:
+        """Parse the ranking rules file and return a configuration dict.
 
+        The ranking rules specify prizes by position ranges and omit explicit
+        winner counts.  This helper reconstructs the equivalent ``premios``
+        structure by inferring the number of winners from position ranges.
+        Stage keys from the logic section are mapped to their legacy names.
+        """
         try:
             with open(filepath, 'r', encoding='utf-8') as f:
                 rules = json.load(f)
@@ -116,6 +155,12 @@ def load_ejecucion_config() -> Dict[str, PromoConfig]:
             with open(filepath, 'r', encoding='utf-8') as f:
                 rules = json.load(f)
 
+            # Determine the list of stage names.  If the file defines a
+            # ``schema_et_sorteos`` section, use the keys under
+            # ``schema_et_sorteos.state`` (removing the ``etapa`` prefix and
+            # upper‑casing) as the stage names.  Otherwise fall back to the
+            # keys from ``logic_sorteos``.  This allows unifying stages for
+            # Estelar and Sueños when a common template is provided.
             etapas: Dict[str, Dict[str, Any]] = {}
             schema_et = rules.get('schema_et_sorteos', {})
             state_def = schema_et.get('state') if isinstance(schema_et, dict) else None
@@ -247,19 +292,31 @@ def load_ejecucion_config() -> Dict[str, PromoConfig]:
         except Exception:
             return None
 
-
+    # Build the complete configuration mapping using only the rule templates
+    # All file paths are resolved relative to this module, so that the script
+    # works regardless of the current working directory.  The JSON templates
+    # live alongside this Python file in the ``nuevo`` folder.
     config: Dict[str, PromoConfig] = {}
 
-    base_dir = Path(__file__).parent
-
+    base_dir = Path(__file__).resolve().parent
+    json_dir: Optional[Path] = None
+    # Walk up the directory tree and look for the expected json folder.
+    for parent in [base_dir] + list(base_dir.parents):
+        candidate = parent / 'pages' / 'Brief' / 'JsonGenerales'
+        if candidate.is_dir():
+            json_dir = candidate
+            break
+    if json_dir is None:
+        # Fallback to the current directory in case the rule files live here.
+        json_dir = base_dir
     # Promotion 17 – TOP / Ranking
-    ranking_file = base_dir / 'pages/Brief/JsonGenerales/ranking-top.rules.full.json'
+    ranking_file = json_dir / 'ranking-top.rules.full.json'
     ranking_cfg = parse_ranking_top(ranking_file)
     if ranking_cfg:
         config['17'] = ranking_cfg
 
     # Promotion 18 / 19 – Sorteos (Estelar, Sueños)
-    sorteos_file = base_dir / 'pages/Brief/JsonGenerales/sorteos.rules.full.json'
+    sorteos_file = json_dir / 'sorteos.rules.full.json'
     sorteos_cfgs = parse_sorteos_rules(sorteos_file)
     # Map mode names to their corresponding promo IDs
     for mode_name, cfg in sorteos_cfgs.items():
@@ -270,7 +327,7 @@ def load_ejecucion_config() -> Dict[str, PromoConfig]:
             config['19'] = cfg
 
     # Promotion 22 – Salta y Gana
-    salta_file = base_dir / 'pages/Brief/JsonGenerales/sorteos.saltaYGana.rules.json'
+    salta_file = json_dir / 'sorteos.saltaYGana.rules.json'
     salta_cfg = parse_salta_y_gana(salta_file)
     if salta_cfg:
         config['22'] = salta_cfg
@@ -468,7 +525,19 @@ def _parse_datetime(value: Any) -> Optional[datetime]:  # type: ignore[name-defi
             return None
 
 def validate_etapas(promo_id: str, cfg: PromoConfig) -> None:
+    """Validate stage chronology, durations and start/end times for each execution segment.
 
+    This implementation no longer uses hard‑coded offsets such as "one day before" or
+    "30 minutes after".  Instead, it derives all expected dates and times from the
+    parameters defined in the JSON rule templates loaded via ``load_ejecucion_config``.
+    For each promotion the relevant ``durations`` (in days) and ``hours`` (with
+    ``start`` and ``end`` times) are read from the configuration and used to
+    compute the expected start and end of each stage relative to the actual
+    beginning of the accumulation and other reference stages.  The comparison
+    tolerates a one‑second difference to accommodate database precision.  When a
+    stage is missing or its parameters are absent from the configuration, the
+    corresponding validations are skipped.
+    """
     out_dir = _out_dir_for_promo(promo_id)
     try:
         segments = querySegmentos(int(promo_id))
