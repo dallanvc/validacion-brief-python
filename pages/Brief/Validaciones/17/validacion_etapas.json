@@ -1,0 +1,294 @@
+[
+  {
+    "segmento": 1043,
+    "nombreSegmento": "TOP ATLANTIC CAF DEL MARTES 09 AL MARTES 16",
+    "validaciones": [
+      {
+        "etapa": "PLANIFICADO",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-08 08:00:00",
+        "valor_encontrado": "2025-09-08 08:00:00",
+        "estado": "OK"
+      },
+      {
+        "etapa": "PLANIFICADO",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-09 07:00:00",
+        "valor_encontrado": "2025-09-09 06:59:59",
+        "estado": "OK"
+      },
+      {
+        "etapa": "PRE EJECUCION",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-09 07:00:00",
+        "valor_encontrado": "2025-09-09 07:00:00",
+        "estado": "OK"
+      },
+      {
+        "etapa": "PRE EJECUCION",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-09 07:59:59",
+        "valor_encontrado": "2025-09-09 07:59:59",
+        "estado": "OK"
+      },
+      {
+        "etapa": "ACUMULACION",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-09 08:00:00",
+        "valor_encontrado": "2025-09-09 08:00:00",
+        "estado": "OK"
+      },
+      {
+        "etapa": "ACUMULACION",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-16 07:59:59",
+        "valor_encontrado": "2025-09-16 07:59:59",
+        "estado": "OK"
+      },
+      {
+        "etapa": "VALIDACION",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-16 08:00:00",
+        "valor_encontrado": "2025-09-16 08:00:00",
+        "estado": "OK"
+      },
+      {
+        "etapa": "VALIDACION",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-16 08:29:59",
+        "valor_encontrado": "2025-09-16 08:29:59",
+        "estado": "OK"
+      },
+      {
+        "etapa": "RECALCULO",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-16 08:00:00",
+        "valor_encontrado": "2025-09-16 08:00:00",
+        "estado": "OK"
+      },
+      {
+        "etapa": "RECALCULO",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-16 08:29:59",
+        "valor_encontrado": "2025-09-16 08:29:59",
+        "estado": "OK"
+      },
+      {
+        "etapa": "RESULTADO",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-16 08:30:00",
+        "valor_encontrado": "2025-09-16 08:30:00",
+        "estado": "OK"
+      },
+      {
+        "etapa": "RESULTADO",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-23 08:29:59",
+        "valor_encontrado": "2025-09-23 08:29:59",
+        "estado": "OK"
+      },
+      {
+        "etapa": "RESULTADO IVIEW",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-16 08:30:00",
+        "valor_encontrado": "2025-09-16 08:30:00",
+        "estado": "OK"
+      },
+      {
+        "etapa": "RESULTADO IVIEW",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-17 13:59:59",
+        "valor_encontrado": "2025-09-17 13:59:59",
+        "estado": "OK"
+      },
+      {
+        "etapa": "PAGOS FISICO",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-16 12:00:00",
+        "valor_encontrado": "2025-09-16 12:00:00",
+        "estado": "OK"
+      },
+      {
+        "etapa": "PAGOS FISICO",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-17 01:29:59",
+        "valor_encontrado": "2025-09-17 01:29:59",
+        "estado": "OK"
+      },
+      {
+        "etapa": "PAGOS FISICO VENCIDOS",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-17 10:00:00",
+        "valor_encontrado": "2025-09-17 10:00:00",
+        "estado": "OK"
+      },
+      {
+        "etapa": "PAGOS FISICO VENCIDOS",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-10-17 09:59:59",
+        "valor_encontrado": "2025-10-17 09:59:59",
+        "estado": "OK"
+      },
+      {
+        "etapa": "FINALIZADO",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-23 08:30:00",
+        "valor_encontrado": "2025-09-23 08:30:00",
+        "estado": "OK"
+      },
+      {
+        "etapa": "FINALIZADO",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-23 08:59:59",
+        "valor_encontrado": "2025-09-23 08:59:59",
+        "estado": "OK"
+      }
+    ]
+  },
+  {
+    "segmento": 1044,
+    "nombreSegmento": "TOP ATLANTIC CAF DEL MARTES 16 AL MARTES 23",
+    "validaciones": [
+      {
+        "etapa": "PLANIFICADO",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-15 08:00:00",
+        "valor_encontrado": "2025-09-15 08:00:00",
+        "estado": "OK"
+      },
+      {
+        "etapa": "PLANIFICADO",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-16 07:00:00",
+        "valor_encontrado": "2025-09-16 06:59:59",
+        "estado": "OK"
+      },
+      {
+        "etapa": "PRE EJECUCION",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-16 07:00:00",
+        "valor_encontrado": "2025-09-16 07:00:00",
+        "estado": "OK"
+      },
+      {
+        "etapa": "PRE EJECUCION",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-16 07:59:59",
+        "valor_encontrado": "2025-09-16 07:59:59",
+        "estado": "OK"
+      },
+      {
+        "etapa": "ACUMULACION",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-16 08:00:00",
+        "valor_encontrado": "2025-09-16 08:00:00",
+        "estado": "OK"
+      },
+      {
+        "etapa": "ACUMULACION",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-23 07:59:59",
+        "valor_encontrado": "2025-09-23 07:59:59",
+        "estado": "OK"
+      },
+      {
+        "etapa": "VALIDACION",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-23 08:00:00",
+        "valor_encontrado": "2025-09-23 08:00:00",
+        "estado": "OK"
+      },
+      {
+        "etapa": "VALIDACION",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-23 08:29:59",
+        "valor_encontrado": "2025-09-23 08:29:59",
+        "estado": "OK"
+      },
+      {
+        "etapa": "RECALCULO",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-23 08:00:00",
+        "valor_encontrado": "2025-09-23 08:00:00",
+        "estado": "OK"
+      },
+      {
+        "etapa": "RECALCULO",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-23 08:29:59",
+        "valor_encontrado": "2025-09-23 08:29:59",
+        "estado": "OK"
+      },
+      {
+        "etapa": "RESULTADO",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-23 08:30:00",
+        "valor_encontrado": "2025-09-23 08:30:00",
+        "estado": "OK"
+      },
+      {
+        "etapa": "RESULTADO",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-30 08:29:59",
+        "valor_encontrado": "2025-09-30 08:29:59",
+        "estado": "OK"
+      },
+      {
+        "etapa": "RESULTADO IVIEW",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-23 08:30:00",
+        "valor_encontrado": "2025-09-23 08:30:00",
+        "estado": "OK"
+      },
+      {
+        "etapa": "RESULTADO IVIEW",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-24 13:59:59",
+        "valor_encontrado": "2025-09-24 13:59:59",
+        "estado": "OK"
+      },
+      {
+        "etapa": "PAGOS FISICO",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-23 12:00:00",
+        "valor_encontrado": "2025-09-23 12:00:00",
+        "estado": "OK"
+      },
+      {
+        "etapa": "PAGOS FISICO",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-24 01:29:59",
+        "valor_encontrado": "2025-09-24 01:29:59",
+        "estado": "OK"
+      },
+      {
+        "etapa": "PAGOS FISICO VENCIDOS",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-24 10:00:00",
+        "valor_encontrado": "2025-09-24 10:00:00",
+        "estado": "OK"
+      },
+      {
+        "etapa": "PAGOS FISICO VENCIDOS",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-10-24 09:59:59",
+        "valor_encontrado": "2025-10-24 09:59:59",
+        "estado": "OK"
+      },
+      {
+        "etapa": "FINALIZADO",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-30 08:30:00",
+        "valor_encontrado": "2025-09-30 08:30:00",
+        "estado": "OK"
+      },
+      {
+        "etapa": "FINALIZADO",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-30 08:59:59",
+        "valor_encontrado": "2025-09-30 08:59:59",
+        "estado": "OK"
+      }
+    ]
+  }
+]

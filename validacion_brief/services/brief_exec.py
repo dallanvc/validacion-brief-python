@@ -18,6 +18,7 @@ import json
 import logging
 import os
 from pathlib import Path
+import shutil
 from typing import Any, Dict, List, Optional
 from datetime import datetime, timedelta
 
@@ -178,7 +179,15 @@ def load_ejecucion_config() -> Dict[str, PromoConfig]:
                 logic_sorteos = rules.get('logic_sorteos', {})
                 if isinstance(logic_sorteos, dict):
                     stage_keys = [k.upper() for k in logic_sorteos.keys()]
-            for st_name in stage_keys:
+            # Homologar nombres a los usados en BD y agregar SORTEO
+            homolog_map = {
+                'PLANIFICACION': 'PLANIFICADO',
+                'PREEJECUCION': 'PRE EJECUCION',
+            }
+            stage_keys_homol = [homolog_map.get(k, k) for k in stage_keys]
+            if 'SORTEO' not in stage_keys_homol:
+                stage_keys_homol.append('SORTEO')
+            for st_name in stage_keys_homol:
                 etapas[st_name] = {}
 
             # Process each mode defined in the rules.  Each mode has its own
@@ -284,7 +293,15 @@ def load_ejecucion_config() -> Dict[str, PromoConfig]:
                 logic = rules.get('logic', {})
                 if isinstance(logic, dict):
                     stage_keys = [k.upper() for k in logic.keys()]
-            for st_name in stage_keys:
+            # Homologar nombres a los usados en BD y agregar SORTEO
+            homolog_map = {
+                'PLANIFICACION': 'PLANIFICADO',
+                'PREEJECUCION': 'PRE EJECUCION',
+            }
+            stage_keys_homol = [homolog_map.get(k, k) for k in stage_keys]
+            if 'SORTEO' not in stage_keys_homol:
+                stage_keys_homol.append('SORTEO')
+            for st_name in stage_keys_homol:
                 etapas[st_name] = {}
             if etapas:
                 cfg['etapas'] = etapas
@@ -298,6 +315,16 @@ def load_ejecucion_config() -> Dict[str, PromoConfig]:
     # live alongside this Python file in the ``nuevo`` folder.
     config: Dict[str, PromoConfig] = {}
 
+    # Determine the directory containing this script and construct paths to the
+    # rule files relative to it.  Using ``__file__`` ensures the lookup is
+    # correct even when ``brief_exec.py`` is invoked from another location.
+    # Determine the directory containing the JSON rule files.
+    # In some projects this script lives in ``validacion_brief/services`` and
+    # the JSON files reside under ``pages/Brief/JsonGenerales`` at the project
+    # root.  In other cases (e.g. when working in isolation in ``reglas/nuevo``)
+    # the rule files live alongside this script.  To support both layouts we
+    # search upwards for a ``pages/Brief/JsonGenerales`` folder; if not found,
+    # we fall back to the current directory.
     base_dir = Path(__file__).resolve().parent
     json_dir: Optional[Path] = None
     # Walk up the directory tree and look for the expected json folder.
@@ -469,16 +496,15 @@ def validate_segments(promo_id: str, cfg: PromoConfig) -> None:
                     expected_names = [str(e.get('nombre') or e.get('nombre_etapa') or '').strip() for e in etapas_cfg if (e.get('nombre') or e.get('nombre_etapa'))]
                 elif isinstance(etapas_cfg, dict):
                     expected_names = list(etapas_cfg.keys())
-                expected_names = [n.upper() for n in expected_names]
-                expected_names.sort()
+                # Normalize stage names (remove accents, unify spaces/underscores)
+                expected_norm = sorted({_normalize_stage_name(n) for n in expected_names})
                 db_rows = queryEtapasSeg(seg_id)
-                found_names = list({str(r['nombre_etapa']).upper() for r in db_rows})
-                found_names.sort()
-                missing = [n for n in expected_names if n not in found_names]
-                extra = [n for n in found_names if n not in expected_names]
+                found_norm = sorted({_normalize_stage_name(str(r['nombre_etapa'])) for r in db_rows})
+                missing = [n for n in expected_norm if n not in found_norm]
+                extra   = [n for n in found_norm   if n not in expected_norm]
                 seg_result['etapas'] = {
-                    'expected': expected_names,
-                    'found': found_names,
+                    'expected': expected_norm,
+                    'found': found_norm,
                     'missing': missing,
                     'extra': extra,
                     'status': 'OK' if not missing and not extra else 'ERROR',
@@ -747,35 +773,33 @@ def validate_etapas(promo_id: str, cfg: PromoConfig) -> None:
                         ref_dt = acum_end_dt
                         day_offset = durations.get(config_key, 0)
                     elif config_key == 'resultado':
-                        # resultado anchors on validacion start date if present, else accumulation end date
-                        val_start = expected_starts.get('VALIDACION')
-                        if val_start:
-                            ref_dt = val_start
+                        # resultado: start at recalculo.end; end = start + durations.resultado
+                        recalc_end = expected_ends.get('RECALCULO')
+                        if recalc_end:
+                            ref_dt = recalc_end
                         else:
                             ref_dt = acum_end_dt
-                        day_offset = durations.get(config_key, 0)
+                        day_offset = 0
                     elif config_key == 'resultadoIview':
-                        # resultIview anchors on validacion start
-                        val_start = expected_starts.get('VALIDACION')
-                        if val_start:
-                            ref_dt = val_start
-                        else:
-                            ref_dt = acum_end_dt
-                        day_offset = durations.get(config_key, 0)
+                        # resultadoIview: start at acumulacion.end; end = acumulacion.end + 1 day
+                        ref_dt = acum_end_dt
+                        day_offset = 0
                     elif config_key == 'pago':
+                        # pago: start at acumulacion.end; end = acumulacion.end + 1 day
                         ref_dt = acum_end_dt
-                        day_offset = durations.get(config_key, 0)
+                        day_offset = 0
                     elif config_key == 'vencido':
+                        # vencido: start = acumulacion.end + 1 day; end = start + durations.vencido
                         ref_dt = acum_end_dt
-                        day_offset = durations.get(config_key, 0)
+                        day_offset = 1
                     elif config_key == 'finalizado':
-                        # finalizado anchors on resultado start if present
-                        res_start = expected_starts.get('RESULTADO')
-                        if res_start:
-                            ref_dt = res_start
+                        # finalizado: start & end anchored on resultado.end
+                        res_end = expected_ends.get('RESULTADO')
+                        if res_end:
+                            ref_dt = res_end
                         else:
                             ref_dt = acum_end_dt
-                        day_offset = durations.get(config_key, 0)
+                        day_offset = 0
                 elif promo_id in ('18', '19'):
                     # Sorteos: use accumulation end for recalc and canjes; canjes for validacion;
                     # validacion for resultado; resultado for finalizado
@@ -871,7 +895,23 @@ def validate_etapas(promo_id: str, cfg: PromoConfig) -> None:
                     expected_start_dt = None
                 if ref_dt is not None and end_time_str is not None:
                     # End may have the same day_offset as start plus the duration for this stage
-                    end_offset = durations.get(config_key, 0)
+                    # End offset can be stage-specific (promo 17 TOP rules)
+                    if promo_id == '17':
+                        if config_key == 'resultado':
+                            end_offset = durations.get('resultado', 0)
+                        elif config_key == 'resultadoIview':
+                            end_offset = 1
+                        elif config_key == 'pago':
+                            end_offset = 1
+                        elif config_key == 'vencido':
+                            # start was +1; adding durations gives (1 + dur)
+                            end_offset = durations.get('vencido', 0)
+                        elif config_key in ('validacion','recalculo','finalizado','acumulacion','planificacion','preEjecucion'):
+                            end_offset = durations.get(config_key, 0)
+                        else:
+                            end_offset = durations.get(config_key, 0)
+                    else:
+                        end_offset = durations.get(config_key, 0)
                     expected_end_dt = build_dt(ref_dt, end_time_str, day_offset + end_offset)
                 else:
                     expected_end_dt = None
@@ -912,6 +952,12 @@ def validate_etapas(promo_id: str, cfg: PromoConfig) -> None:
         logging.error('[validateEtapas] Error validating etapas for promo', extra={'promo': promo_id, 'error': err})
 
 def validate_all(promos: Optional[List[str]] = None) -> None:
+
+    validations_root = Path("pages/Brief/Validaciones")
+    if validations_root.exists():
+        shutil.rmtree(validations_root)
+    validations_root.mkdir(parents=True, exist_ok=True)
+
     """Validate all promotions or a subset specified by the caller."""
     cfg = load_ejecucion_config()
     list_to_validate = promos if promos and promos[0] != 'all' else list(cfg.keys())

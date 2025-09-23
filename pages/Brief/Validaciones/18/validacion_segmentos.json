@@ -1,0 +1,404 @@
+[
+  {
+    "segmento": 1054,
+    "nombreSegmento": "ESTELAR CAF DEL DOMINGO 14 AL MIERCOLES 17",
+    "multiplicador": {
+      "expected": 5,
+      "found": [
+        10.0
+      ],
+      "status": "ERROR"
+    },
+    "equivalencias": {
+      "expected": [
+        {
+          "min": 5.0,
+          "max": 200.0,
+          "puntaje": 1.0
+        }
+      ],
+      "found": [
+        {
+          "min": 5.0,
+          "max": 0.0,
+          "puntaje": 1.0
+        }
+      ],
+      "status": "ERROR"
+    },
+    "configuraciones": {
+      "expected": {
+        "ACUM_MAX_OPC": 200,
+        "MAE_CANTIDAD_CHOCOLATEO": 60,
+        "OPC_MIN_CANJE": 25,
+        "TIPO_AUDIENCIA": 1
+      },
+      "found": {
+        "ACUM_MAX_OPC": 200,
+        "MAE_CANTIDAD_CHOCOLATEO": 60,
+        "OPC_MIN_CANJE": 25,
+        "TIPO_AUDIENCIA": 1
+      },
+      "diffs": {},
+      "status": "OK"
+    },
+    "premios": {
+      "expected": [
+        {
+          "condicion_minima": 0.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 500.0,
+          "cantidad_ganadores": 2.0
+        },
+        {
+          "condicion_minima": 0.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 1000.0,
+          "cantidad_ganadores": 2.0
+        },
+        {
+          "condicion_minima": 0.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 1500.0,
+          "cantidad_ganadores": 2.0
+        },
+        {
+          "condicion_minima": 0.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 2000.0,
+          "cantidad_ganadores": 2.0
+        },
+        {
+          "condicion_minima": 0.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 5000.0,
+          "cantidad_ganadores": 1.0
+        }
+      ],
+      "found": [
+        {
+          "condicion_minima": 2.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 500.0,
+          "cantidad_ganadores": 2.0
+        },
+        {
+          "condicion_minima": 2.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 1000.0,
+          "cantidad_ganadores": 2.0
+        },
+        {
+          "condicion_minima": 2.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 1000.0,
+          "cantidad_ganadores": 2.0
+        },
+        {
+          "condicion_minima": 2.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 2000.0,
+          "cantidad_ganadores": 2.0
+        }
+      ],
+      "status": "ERROR"
+    },
+    "etapas": {
+      "expected": [
+        "ACUMULACION",
+        "CANJES",
+        "FINALIZADO",
+        "PLANIFICADO",
+        "PRE EJECUCION",
+        "RECALCULO",
+        "RESULTADO",
+        "SORTEO",
+        "VALIDACION"
+      ],
+      "found": [
+        "ACUMULACION",
+        "CANJES",
+        "FINALIZADO",
+        "PLANIFICADO",
+        "PRE EJECUCION",
+        "RECALCULO",
+        "RESULTADO",
+        "SORTEO",
+        "VALIDACION"
+      ],
+      "missing": [],
+      "extra": [],
+      "status": "OK"
+    }
+  },
+  {
+    "segmento": 1055,
+    "nombreSegmento": "ESTELAR CAF DEL MIERCOLES 17 AL DOMINGO 21",
+    "multiplicador": {
+      "expected": 5,
+      "found": [
+        10.0
+      ],
+      "status": "ERROR"
+    },
+    "equivalencias": {
+      "expected": [
+        {
+          "min": 5.0,
+          "max": 200.0,
+          "puntaje": 1.0
+        }
+      ],
+      "found": [
+        {
+          "min": 5.0,
+          "max": 0.0,
+          "puntaje": 1.0
+        }
+      ],
+      "status": "ERROR"
+    },
+    "configuraciones": {
+      "expected": {
+        "ACUM_MAX_OPC": 200,
+        "MAE_CANTIDAD_CHOCOLATEO": 60,
+        "OPC_MIN_CANJE": 25,
+        "TIPO_AUDIENCIA": 1
+      },
+      "found": {
+        "ACUM_MAX_OPC": 200,
+        "MAE_CANTIDAD_CHOCOLATEO": 60,
+        "OPC_MIN_CANJE": 25,
+        "TIPO_AUDIENCIA": 1
+      },
+      "diffs": {},
+      "status": "OK"
+    },
+    "premios": {
+      "expected": [
+        {
+          "condicion_minima": 0.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 500.0,
+          "cantidad_ganadores": 2.0
+        },
+        {
+          "condicion_minima": 0.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 1000.0,
+          "cantidad_ganadores": 2.0
+        },
+        {
+          "condicion_minima": 0.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 1500.0,
+          "cantidad_ganadores": 2.0
+        },
+        {
+          "condicion_minima": 0.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 2000.0,
+          "cantidad_ganadores": 2.0
+        },
+        {
+          "condicion_minima": 0.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 5000.0,
+          "cantidad_ganadores": 1.0
+        }
+      ],
+      "found": [
+        {
+          "condicion_minima": 2.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 500.0,
+          "cantidad_ganadores": 2.0
+        },
+        {
+          "condicion_minima": 2.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 500.0,
+          "cantidad_ganadores": 2.0
+        },
+        {
+          "condicion_minima": 2.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 1000.0,
+          "cantidad_ganadores": 2.0
+        },
+        {
+          "condicion_minima": 2.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 1500.0,
+          "cantidad_ganadores": 2.0
+        },
+        {
+          "condicion_minima": 1.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 5000.0,
+          "cantidad_ganadores": 1.0
+        }
+      ],
+      "status": "ERROR"
+    },
+    "etapas": {
+      "expected": [
+        "ACUMULACION",
+        "CANJES",
+        "FINALIZADO",
+        "PLANIFICADO",
+        "PRE EJECUCION",
+        "RECALCULO",
+        "RESULTADO",
+        "SORTEO",
+        "VALIDACION"
+      ],
+      "found": [
+        "ACUMULACION",
+        "CANJES",
+        "FINALIZADO",
+        "PLANIFICADO",
+        "PRE EJECUCION",
+        "RECALCULO",
+        "RESULTADO",
+        "SORTEO",
+        "VALIDACION"
+      ],
+      "missing": [],
+      "extra": [],
+      "status": "OK"
+    }
+  },
+  {
+    "segmento": 1056,
+    "nombreSegmento": "ESTELAR CAF DEL DOMINGO 21 AL MIERCOLES 24",
+    "multiplicador": {
+      "expected": 5,
+      "found": [
+        10.0
+      ],
+      "status": "ERROR"
+    },
+    "equivalencias": {
+      "expected": [
+        {
+          "min": 5.0,
+          "max": 200.0,
+          "puntaje": 1.0
+        }
+      ],
+      "found": [
+        {
+          "min": 5.0,
+          "max": 0.0,
+          "puntaje": 1.0
+        }
+      ],
+      "status": "ERROR"
+    },
+    "configuraciones": {
+      "expected": {
+        "ACUM_MAX_OPC": 200,
+        "MAE_CANTIDAD_CHOCOLATEO": 60,
+        "OPC_MIN_CANJE": 25,
+        "TIPO_AUDIENCIA": 1
+      },
+      "found": {
+        "ACUM_MAX_OPC": 200,
+        "MAE_CANTIDAD_CHOCOLATEO": 60,
+        "OPC_MIN_CANJE": 25,
+        "TIPO_AUDIENCIA": 1
+      },
+      "diffs": {},
+      "status": "OK"
+    },
+    "premios": {
+      "expected": [
+        {
+          "condicion_minima": 0.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 500.0,
+          "cantidad_ganadores": 2.0
+        },
+        {
+          "condicion_minima": 0.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 1000.0,
+          "cantidad_ganadores": 2.0
+        },
+        {
+          "condicion_minima": 0.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 1500.0,
+          "cantidad_ganadores": 2.0
+        },
+        {
+          "condicion_minima": 0.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 2000.0,
+          "cantidad_ganadores": 2.0
+        },
+        {
+          "condicion_minima": 0.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 5000.0,
+          "cantidad_ganadores": 1.0
+        }
+      ],
+      "found": [
+        {
+          "condicion_minima": 2.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 500.0,
+          "cantidad_ganadores": 2.0
+        },
+        {
+          "condicion_minima": 2.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 1000.0,
+          "cantidad_ganadores": 2.0
+        },
+        {
+          "condicion_minima": 2.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 1000.0,
+          "cantidad_ganadores": 2.0
+        },
+        {
+          "condicion_minima": 2.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 2000.0,
+          "cantidad_ganadores": 2.0
+        }
+      ],
+      "status": "ERROR"
+    },
+    "etapas": {
+      "expected": [
+        "ACUMULACION",
+        "CANJES",
+        "FINALIZADO",
+        "PLANIFICADO",
+        "PRE EJECUCION",
+        "RECALCULO",
+        "RESULTADO",
+        "SORTEO",
+        "VALIDACION"
+      ],
+      "found": [
+        "ACUMULACION",
+        "CANJES",
+        "FINALIZADO",
+        "PLANIFICADO",
+        "PRE EJECUCION",
+        "RECALCULO",
+        "RESULTADO",
+        "SORTEO",
+        "VALIDACION"
+      ],
+      "missing": [],
+      "extra": [],
+      "status": "OK"
+    }
+  }
+]

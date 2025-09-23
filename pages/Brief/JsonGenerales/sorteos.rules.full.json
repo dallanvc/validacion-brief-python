@@ -12,14 +12,13 @@
           "finalizado": 0
         },
   "hours_et_sorteos": {
-    "planificacion": { "start": "08:00",     "end": "07:59:59" },
-    "preEjecucion": { "start": "07:00",     "end": "07:59:59" },
+    "planificacion": { "start": "00:00",     "end": "22:59:59" },
+    "preEjecucion": { "start": "23:00",     "end": "23:59:59" },
     "acumulacion":  { "start": "00:00",     "end": "23:59:59" },
-    "recalculo":    { "start": "08:00",     "end": "08:29:59" },
-    "canjes":       { "start": "00:00",     "end": "23:59:59" },
-    "validacion":   { "start": "08:00",     "end": "08:29:59" },
-    "resultado":    { "start": "08:30",     "end": "08:29:59" },
-    "finalizado":   { "start": "08:30",     "end": "08:59:59" }
+    "recalculo":    { "start": "00:00",     "end": "00:29:59" },
+    "validacion":   { "start": "00:00",     "end": "00:29:59" },
+    "resultado":    { "start": "03:00",     "end": "02:59:59" },
+    "finalizado":   { "start": "03:00",     "end": "05:59:59" }
   },
   "schema_et_sorteos": {
     "state": {
@@ -46,7 +45,7 @@
           "if": [
             { "==": [ "i", 0 ] },
             { "get": "params.seed.firstAcumulacionStart" },
-            { "addDays": [ "state.etapaAcumulacion[i-1].fechaFin", 1 ] }
+            {"addDays": ["state.etapaAcumulacion[i-1].fechaInicio", {"get": "defaults.durations.acumulacion"}]}
           ]
         }
       },
@@ -78,12 +77,12 @@
       {
         "target": "state.etapaPlanificacion[i].fechaInicio",
         "value": {
-          "addDays": [ "state.etapaAcumulacion[i].fechaInicio", { "neg": "defaults.durations.planificacion" } ]
+          "addDays": ["state.etapaAcumulacion[i].fechaInicio", -1]
         }
       },
       {
         "target": "state.etapaPlanificacion[i].fechaFin",
-        "value": { "get": "state.etapaAcumulacion[i].fechaInicio" }
+        "value": { "get": "state.etapaPlanificacion[i].fechaInicio" }
       },
       {
         "op": "setHoursFromFirst",
@@ -97,7 +96,7 @@
     "preEjecucion": [
       {
         "target": "state.etapaPreEjecucion[i].fechaInicio",
-        "value": { "get": "state.etapaAcumulacion[i].fechaInicio" }
+          "addDays": ["state.etapaAcumulacion[i].fechaInicio", -1]
       },
       {
         "target": "state.etapaPreEjecucion[i].fechaFin",
@@ -140,14 +139,6 @@
         "value": {
           "addDays": [ "state.etapaAcumulacion[i].fechaFin", { "get": "defaults.durations.canjes" } ]
         }
-      },
-      {
-        "op": "setHoursFromFirst",
-        "args": [
-          "state.etapaCanjes",
-          { "get": "defaults.hours.canjes.start" },
-          { "get": "defaults.hours.canjes.end" }
-        ]
       }
     ],
     "validacion": [
@@ -226,8 +217,8 @@
         },
         "durations": {
 
-          "acumulacion1": 2,
-          "acumulacion2": 3
+          "acumulacion1": 3,
+          "acumulacion2": 2
         },
 
         "premios": [

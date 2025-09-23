@@ -1,0 +1,314 @@
+[
+  {
+    "segmento": 1054,
+    "nombreSegmento": "ESTELAR CAF DEL DOMINGO 14 AL MIERCOLES 17",
+    "validaciones": [
+      {
+        "etapa": "PLANIFICADO",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-13 00:00:00",
+        "valor_encontrado": "2025-09-13 00:00:00",
+        "estado": "OK"
+      },
+      {
+        "etapa": "PLANIFICADO",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-14 22:59:59",
+        "valor_encontrado": "2025-09-13 22:59:59",
+        "estado": "ERROR"
+      },
+      {
+        "etapa": "PRE EJECUCION",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-14 23:00:00",
+        "valor_encontrado": "2025-09-13 23:00:00",
+        "estado": "ERROR"
+      },
+      {
+        "etapa": "PRE EJECUCION",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-14 23:59:59",
+        "valor_encontrado": "2025-09-15 16:59:59",
+        "estado": "ERROR"
+      },
+      {
+        "etapa": "ACUMULACION",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-14 00:00:00",
+        "valor_encontrado": "2025-09-14 00:00:00",
+        "estado": "OK"
+      },
+      {
+        "etapa": "ACUMULACION",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-14 23:59:59",
+        "valor_encontrado": "2025-09-16 23:59:59",
+        "estado": "ERROR"
+      },
+      {
+        "etapa": "VALIDACION",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-17 00:00:00",
+        "valor_encontrado": "2025-09-17 00:25:00",
+        "estado": "ERROR"
+      },
+      {
+        "etapa": "VALIDACION",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-17 00:29:59",
+        "valor_encontrado": "2025-09-17 02:59:59",
+        "estado": "ERROR"
+      },
+      {
+        "etapa": "RECALCULO",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-16 00:00:00",
+        "valor_encontrado": "2025-09-17 00:00:00",
+        "estado": "ERROR"
+      },
+      {
+        "etapa": "RECALCULO",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-16 00:29:59",
+        "valor_encontrado": "2025-09-17 00:29:59",
+        "estado": "ERROR"
+      },
+      {
+        "etapa": "RESULTADO",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-17 03:00:00",
+        "valor_encontrado": "2025-09-17 03:00:00",
+        "estado": "OK"
+      },
+      {
+        "etapa": "RESULTADO",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-17 02:59:59",
+        "valor_encontrado": "2025-09-21 02:59:59",
+        "estado": "ERROR"
+      },
+      {
+        "etapa": "FINALIZADO",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-17 03:00:00",
+        "valor_encontrado": "2025-09-21 03:00:00",
+        "estado": "ERROR"
+      },
+      {
+        "etapa": "FINALIZADO",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-17 05:59:59",
+        "valor_encontrado": "2025-09-21 05:59:59",
+        "estado": "ERROR"
+      }
+    ]
+  },
+  {
+    "segmento": 1055,
+    "nombreSegmento": "ESTELAR CAF DEL MIERCOLES 17 AL DOMINGO 21",
+    "validaciones": [
+      {
+        "etapa": "PLANIFICADO",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-16 00:00:00",
+        "valor_encontrado": "2025-09-16 00:00:00",
+        "estado": "OK"
+      },
+      {
+        "etapa": "PLANIFICADO",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-17 22:59:59",
+        "valor_encontrado": "2025-09-16 22:59:59",
+        "estado": "ERROR"
+      },
+      {
+        "etapa": "PRE EJECUCION",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-17 23:00:00",
+        "valor_encontrado": "2025-09-16 23:00:00",
+        "estado": "ERROR"
+      },
+      {
+        "etapa": "PRE EJECUCION",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-17 23:59:59",
+        "valor_encontrado": "2025-09-16 23:59:59",
+        "estado": "ERROR"
+      },
+      {
+        "etapa": "ACUMULACION",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-17 00:00:00",
+        "valor_encontrado": "2025-09-17 00:00:00",
+        "estado": "OK"
+      },
+      {
+        "etapa": "ACUMULACION",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-17 23:59:59",
+        "valor_encontrado": "2025-09-20 23:59:59",
+        "estado": "ERROR"
+      },
+      {
+        "etapa": "VALIDACION",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-21 00:00:00",
+        "valor_encontrado": "2025-09-21 00:55:00",
+        "estado": "ERROR"
+      },
+      {
+        "etapa": "VALIDACION",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-21 00:29:59",
+        "valor_encontrado": "2025-09-21 02:59:59",
+        "estado": "ERROR"
+      },
+      {
+        "etapa": "RECALCULO",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-20 00:00:00",
+        "valor_encontrado": "2025-09-21 00:00:00",
+        "estado": "ERROR"
+      },
+      {
+        "etapa": "RECALCULO",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-20 00:29:59",
+        "valor_encontrado": "2025-09-21 00:29:59",
+        "estado": "ERROR"
+      },
+      {
+        "etapa": "RESULTADO",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-21 03:00:00",
+        "valor_encontrado": "2025-09-21 03:00:00",
+        "estado": "OK"
+      },
+      {
+        "etapa": "RESULTADO",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-21 02:59:59",
+        "valor_encontrado": "2025-09-24 02:59:59",
+        "estado": "ERROR"
+      },
+      {
+        "etapa": "FINALIZADO",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-21 03:00:00",
+        "valor_encontrado": "2025-09-24 03:00:00",
+        "estado": "ERROR"
+      },
+      {
+        "etapa": "FINALIZADO",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-21 05:59:59",
+        "valor_encontrado": "2025-09-24 05:59:59",
+        "estado": "ERROR"
+      }
+    ]
+  },
+  {
+    "segmento": 1056,
+    "nombreSegmento": "ESTELAR CAF DEL DOMINGO 21 AL MIERCOLES 24",
+    "validaciones": [
+      {
+        "etapa": "PLANIFICADO",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-20 00:00:00",
+        "valor_encontrado": "2025-09-20 00:00:00",
+        "estado": "OK"
+      },
+      {
+        "etapa": "PLANIFICADO",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-21 22:59:59",
+        "valor_encontrado": "2025-09-20 22:59:59",
+        "estado": "ERROR"
+      },
+      {
+        "etapa": "PRE EJECUCION",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-21 23:00:00",
+        "valor_encontrado": "2025-09-20 23:00:00",
+        "estado": "ERROR"
+      },
+      {
+        "etapa": "PRE EJECUCION",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-21 23:59:59",
+        "valor_encontrado": "2025-09-20 23:59:59",
+        "estado": "ERROR"
+      },
+      {
+        "etapa": "ACUMULACION",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-21 00:00:00",
+        "valor_encontrado": "2025-09-21 00:00:00",
+        "estado": "OK"
+      },
+      {
+        "etapa": "ACUMULACION",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-21 23:59:59",
+        "valor_encontrado": "2025-09-23 23:59:59",
+        "estado": "ERROR"
+      },
+      {
+        "etapa": "VALIDACION",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-24 00:00:00",
+        "valor_encontrado": "2025-09-24 00:25:00",
+        "estado": "ERROR"
+      },
+      {
+        "etapa": "VALIDACION",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-24 00:29:59",
+        "valor_encontrado": "2025-09-24 02:59:59",
+        "estado": "ERROR"
+      },
+      {
+        "etapa": "RECALCULO",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-23 00:00:00",
+        "valor_encontrado": "2025-09-24 00:00:00",
+        "estado": "ERROR"
+      },
+      {
+        "etapa": "RECALCULO",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-23 00:29:59",
+        "valor_encontrado": "2025-09-24 00:29:59",
+        "estado": "ERROR"
+      },
+      {
+        "etapa": "RESULTADO",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-24 03:00:00",
+        "valor_encontrado": "2025-09-24 03:00:00",
+        "estado": "OK"
+      },
+      {
+        "etapa": "RESULTADO",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-24 02:59:59",
+        "valor_encontrado": "2025-09-28 02:59:59",
+        "estado": "ERROR"
+      },
+      {
+        "etapa": "FINALIZADO",
+        "regla": "Inicio según reglas de configuración",
+        "valor_esperado": "2025-09-24 03:00:00",
+        "valor_encontrado": "2025-09-28 03:00:00",
+        "estado": "ERROR"
+      },
+      {
+        "etapa": "FINALIZADO",
+        "regla": "Fin según reglas de configuración",
+        "valor_esperado": "2025-09-24 05:59:59",
+        "valor_encontrado": "2025-09-28 05:59:59",
+        "estado": "ERROR"
+      }
+    ]
+  }
+]

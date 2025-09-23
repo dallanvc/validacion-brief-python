@@ -46,7 +46,7 @@
       },
       "resultado": {
         "start": "08:30",
-        "end": "08:30"
+        "end": "08:29:59"
       },
       "resultadoIview": {
         "start": "08:30",
@@ -54,7 +54,7 @@
       },
       "pago": {
         "start": "12:00",
-        "end": "01:30:00"
+        "end": "01:29:59"
       },
       "vencido": {
         "start": "10:00",
@@ -263,7 +263,7 @@
           "get": "state.etapaAcumulacion[i].fechaFin"
         }
       },
-      {
+      { 
         "target": "state.etapaResultadoIview[i].fechaFin",
         "value": {
           "addDays": ["state.etapaAcumulacion[i].fechaFin", 1]

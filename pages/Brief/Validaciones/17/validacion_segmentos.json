@@ -1,0 +1,432 @@
+[
+  {
+    "segmento": 1043,
+    "nombreSegmento": "TOP ATLANTIC CAF DEL MARTES 09 AL MARTES 16",
+    "multiplicador": {
+      "expected": 5,
+      "found": [
+        10.0
+      ],
+      "status": "ERROR"
+    },
+    "equivalencias": {
+      "expected": [
+        {
+          "min": 5.0,
+          "max": 200.0,
+          "puntaje": 1.0
+        }
+      ],
+      "found": [],
+      "status": "ERROR"
+    },
+    "configuraciones": {
+      "expected": {
+        "CANTIDAD_FILAS": 30,
+        "TIPO_AUDIENCIA": 1
+      },
+      "found": {
+        "CANTIDAD_FILAS": 30,
+        "PAGO_FISICO_EBS": null,
+        "TIPO_AUDIENCIA": 1
+      },
+      "diffs": {},
+      "status": "OK"
+    },
+    "premios": {
+      "expected": [
+        {
+          "condicion_minima": 21.0,
+          "condicion_maxima": 25.0,
+          "valor_premio": 300.0,
+          "cantidad_ganadores": 5.0
+        },
+        {
+          "condicion_minima": 11.0,
+          "condicion_maxima": 20.0,
+          "valor_premio": 400.0,
+          "cantidad_ganadores": 10.0
+        },
+        {
+          "condicion_minima": 10.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 500.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 9.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 600.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 8.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 700.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 7.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 800.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 6.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 1000.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 5.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 1500.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 4.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 2000.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 3.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 3500.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 2.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 5500.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 1.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 10000.0,
+          "cantidad_ganadores": 1.0
+        }
+      ],
+      "found": [
+        {
+          "condicion_minima": 21.0,
+          "condicion_maxima": 25.0,
+          "valor_premio": 300.0,
+          "cantidad_ganadores": 5.0
+        },
+        {
+          "condicion_minima": 11.0,
+          "condicion_maxima": 20.0,
+          "valor_premio": 400.0,
+          "cantidad_ganadores": 10.0
+        },
+        {
+          "condicion_minima": 10.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 500.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 9.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 600.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 8.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 700.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 7.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 800.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 6.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 1000.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 5.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 1500.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 4.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 2000.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 3.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 3500.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 2.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 5500.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 1.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 10000.0,
+          "cantidad_ganadores": 1.0
+        }
+      ],
+      "status": "OK"
+    },
+    "etapas": {
+      "expected": [
+        "ACUMULACION",
+        "FINALIZADO",
+        "PAGOS FISICO",
+        "PAGOS FISICO VENCIDOS",
+        "PLANIFICADO",
+        "PRE EJECUCION",
+        "RECALCULO",
+        "RESULTADO",
+        "RESULTADO IVIEW",
+        "VALIDACION"
+      ],
+      "found": [
+        "ACUMULACION",
+        "FINALIZADO",
+        "PAGOS FISICO",
+        "PAGOS FISICO VENCIDOS",
+        "PLANIFICADO",
+        "PRE EJECUCION",
+        "RECALCULO",
+        "RESULTADO",
+        "RESULTADO IVIEW",
+        "VALIDACION"
+      ],
+      "missing": [],
+      "extra": [],
+      "status": "OK"
+    }
+  },
+  {
+    "segmento": 1044,
+    "nombreSegmento": "TOP ATLANTIC CAF DEL MARTES 16 AL MARTES 23",
+    "multiplicador": {
+      "expected": 5,
+      "found": [
+        10.0
+      ],
+      "status": "ERROR"
+    },
+    "equivalencias": {
+      "expected": [
+        {
+          "min": 5.0,
+          "max": 200.0,
+          "puntaje": 1.0
+        }
+      ],
+      "found": [],
+      "status": "ERROR"
+    },
+    "configuraciones": {
+      "expected": {
+        "CANTIDAD_FILAS": 30,
+        "TIPO_AUDIENCIA": 1
+      },
+      "found": {
+        "CANTIDAD_FILAS": 30,
+        "PAGO_FISICO_EBS": null,
+        "TIPO_AUDIENCIA": 1
+      },
+      "diffs": {},
+      "status": "OK"
+    },
+    "premios": {
+      "expected": [
+        {
+          "condicion_minima": 21.0,
+          "condicion_maxima": 25.0,
+          "valor_premio": 300.0,
+          "cantidad_ganadores": 5.0
+        },
+        {
+          "condicion_minima": 11.0,
+          "condicion_maxima": 20.0,
+          "valor_premio": 400.0,
+          "cantidad_ganadores": 10.0
+        },
+        {
+          "condicion_minima": 10.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 500.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 9.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 600.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 8.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 700.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 7.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 800.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 6.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 1000.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 5.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 1500.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 4.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 2000.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 3.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 3500.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 2.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 5500.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 1.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 10000.0,
+          "cantidad_ganadores": 1.0
+        }
+      ],
+      "found": [
+        {
+          "condicion_minima": 21.0,
+          "condicion_maxima": 25.0,
+          "valor_premio": 300.0,
+          "cantidad_ganadores": 5.0
+        },
+        {
+          "condicion_minima": 11.0,
+          "condicion_maxima": 20.0,
+          "valor_premio": 400.0,
+          "cantidad_ganadores": 10.0
+        },
+        {
+          "condicion_minima": 10.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 500.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 9.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 600.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 8.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 700.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 7.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 800.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 6.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 1000.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 5.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 1500.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 4.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 2000.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 3.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 3500.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 2.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 5500.0,
+          "cantidad_ganadores": 1.0
+        },
+        {
+          "condicion_minima": 1.0,
+          "condicion_maxima": 0.0,
+          "valor_premio": 10000.0,
+          "cantidad_ganadores": 1.0
+        }
+      ],
+      "status": "OK"
+    },
+    "etapas": {
+      "expected": [
+        "ACUMULACION",
+        "FINALIZADO",
+        "PAGOS FISICO",
+        "PAGOS FISICO VENCIDOS",
+        "PLANIFICADO",
+        "PRE EJECUCION",
+        "RECALCULO",
+        "RESULTADO",
+        "RESULTADO IVIEW",
+        "VALIDACION"
+      ],
+      "found": [
+        "ACUMULACION",
+        "FINALIZADO",
+        "PAGOS FISICO",
+        "PAGOS FISICO VENCIDOS",
+        "PLANIFICADO",
+        "PRE EJECUCION",
+        "RECALCULO",
+        "RESULTADO",
+        "RESULTADO IVIEW",
+        "VALIDACION"
+      ],
+      "missing": [],
+      "extra": [],
+      "status": "OK"
+    }
+  }
+]
